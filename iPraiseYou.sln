@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iPraiseYou.API", "iPraiseYou.API\iPraiseYou.API.csproj", "{27C1B286-E40C-4F0F-AEFD-E7596CEAB2FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27C1B286-E40C-4F0F-AEFD-E7596CEAB2FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27C1B286-E40C-4F0F-AEFD-E7596CEAB2FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27C1B286-E40C-4F0F-AEFD-E7596CEAB2FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27C1B286-E40C-4F0F-AEFD-E7596CEAB2FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {079851C3-7722-4B70-AE52-87CD25F95634}
+	EndGlobalSection
+EndGlobal
