@@ -25,7 +25,10 @@ namespace iPraiseYou.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Escala>>> Get()
         {
-            return await _context.Escalas.AsNoTracking().Include(m => m.Musicos).Include(m => m.Musicas).ToListAsync();
+            return await _context.Escalas.AsNoTracking()
+                .Include(m => m.Musicos)
+                .Include(m => m.Musicas)
+                .ToListAsync();
         }
 
         // GET: api/Escalas/5
