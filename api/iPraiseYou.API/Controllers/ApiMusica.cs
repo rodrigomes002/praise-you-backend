@@ -9,11 +9,11 @@ namespace iPraiseYou.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MusicasController : ControllerBase
+    public class ApiMusica : ControllerBase
     {
         private readonly DataContext _context;
 
-        public MusicasController(DataContext context)
+        public ApiMusica(DataContext context)
         {
             _context = context;
         }

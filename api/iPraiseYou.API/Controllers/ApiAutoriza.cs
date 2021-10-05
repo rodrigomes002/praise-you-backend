@@ -1,6 +1,7 @@
 ﻿using iPraiseYou.API.DTO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,15 +10,16 @@ namespace iPraiseYou.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AutorizaController : ControllerBase
+    public class ApiAutoriza : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-
-        public AutorizaController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        private readonly IConfiguration _configuration;
+        public ApiAutoriza(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -75,9 +77,9 @@ namespace iPraiseYou.API.Controllers
         }
 
 
-        private UsuarioDTO GeraToken(UsuarioDTO dto)
+        private UsuarioToken GeraToken(UsuarioDTO dto)
         {
-            return dto;
+            return new UsuarioToken { };
         }
     }
 }

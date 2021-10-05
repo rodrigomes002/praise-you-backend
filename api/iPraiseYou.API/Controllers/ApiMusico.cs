@@ -12,77 +12,74 @@ namespace iPraiseYou.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EscalasController : ControllerBase
+    public class ApiMusico : ControllerBase
     {
         private readonly DataContext _context;
 
-        public EscalasController(DataContext context)
+        public ApiMusico(DataContext context)
         {
             _context = context;
-        }        
-
-        // GET: api/Escalas
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Escala>>> Get()
-        {
-            return await _context.Escalas.AsNoTracking()
-                .Include(m => m.Musicos)
-                .Include(m => m.Musicas)
-                .ToListAsync();
         }
 
-        // GET: api/Escalas/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Escala>> Get(int id)
+        // GET: api/Musicos
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Musico>>> Get()
         {
-            var escala = await _context.Escalas.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
+            return await _context.Musicos.AsNoTracking().ToListAsync();
+        }
 
-            if (escala == null)
+        // GET: api/Musicos/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Musico>> Get(int id)
+        {
+            var musico = await _context.Musicos.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
+
+            if (musico == null)
             {
                 return NotFound();
             }
 
-            return escala;
+            return musico;
         }
 
-        // PUT: api/Escalas/5
+        // PUT: api/Musicos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Escala escala)
+        public async Task<IActionResult> Put(int id, [FromBody] Musico musico)
         {
-            if (id != escala.Id)
+            if (id != musico.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(escala).State = EntityState.Modified;
+            _context.Entry(musico).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return Ok();
 
         }
 
-        // POST: api/Escalas
+        // POST: api/Musicos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Escala>> Post([FromBody] Escala escala)
+        public async Task<ActionResult<Musico>> Post(Musico musico)
         {
-            _context.Escalas.Add(escala);
+            _context.Musicos.Add(musico);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Get", new { id = escala.Id }, escala);
+            return CreatedAtAction("Get", new { id = musico.Id }, musico);
         }
 
-        // DELETE: api/Escalas/5
+        // DELETE: api/Musicos/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var escala = await _context.Escalas.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
-            if (escala == null)
+            var musico = await _context.Musicos.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
+            if (musico == null)
             {
                 return NotFound();
             }
 
-            _context.Escalas.Remove(escala);
+            _context.Musicos.Remove(musico);
             await _context.SaveChangesAsync();
 
             return NoContent();
