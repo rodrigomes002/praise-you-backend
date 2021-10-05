@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using iPraiseYou.API.Data;
+using iPraiseYou.API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using iPraiseYou.API.Data;
-using iPraiseYou.API.Entities;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace iPraiseYou.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class ApiMusico : ControllerBase
     {
         private readonly DataContext _context;

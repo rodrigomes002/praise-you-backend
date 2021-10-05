@@ -1,5 +1,6 @@
 ﻿using iPraiseYou.API.Data;
 using iPraiseYou.API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace iPraiseYou.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class ApiMusica : ControllerBase
     {
         private readonly DataContext _context;
