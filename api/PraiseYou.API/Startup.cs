@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 
-namespace iPraiseYou.API
+namespace PraiseYou.API
 {
     public class Startup
     {

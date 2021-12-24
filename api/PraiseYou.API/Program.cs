@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace iPraiseYou.API
+namespace PraiseYou.API
 {
     public class Program
     {

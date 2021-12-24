@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "iPraiseYou.API": {
+    "PraiseYou.API": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
