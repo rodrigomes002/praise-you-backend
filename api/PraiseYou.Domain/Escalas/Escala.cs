@@ -1,9 +1,9 @@
-﻿using PraiseYou.Domain.MusicaLouvor;
-using PraiseYou.Domain.MusicoLouvor;
+﻿using PraiseYou.Domain.Musicas;
+using PraiseYou.Domain.Musicos;
 using System;
 using System.Collections.Generic;
 
-namespace PraiseYou.Domain.EscalaLouvor
+namespace PraiseYou.Domain.Escalas
 {
     public class Escala
     {

@@ -1,8 +1,8 @@
-﻿using iPraiseYou.API.DTO;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using PraiseYou.Application.Usuario;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iPraiseYou.API.Controllers
+namespace PraiseYou.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -33,7 +33,7 @@ namespace iPraiseYou.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult> RegisterUser([FromBody] UsuarioDTO dto)
+        public async Task<ActionResult> RegisterUser([FromBody] UsuarioRequisicao requisicao)
         {
             if (!ModelState.IsValid)
             {
@@ -42,12 +42,12 @@ namespace iPraiseYou.API.Controllers
 
             var user = new IdentityUser
             {
-                UserName = dto.Email,
-                Email = dto.Email,
+                UserName = requisicao.Email,
+                Email = requisicao.Email,
                 EmailConfirmed = true
             };
 
-            var result = await _userManager.CreateAsync(user, dto.Password);
+            var result = await _userManager.CreateAsync(user, requisicao.Password);
 
             if (!result.Succeeded)
             {
@@ -55,23 +55,23 @@ namespace iPraiseYou.API.Controllers
             }
 
             await _signInManager.SignInAsync(user, false);
-            return Ok(GeraToken(dto));
+            return Ok(GeraToken(requisicao));
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult> Login([FromBody] UsuarioDTO dto)
+        public async Task<ActionResult> Login([FromBody] UsuarioRequisicao requisicao)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState.Values.SelectMany(e => e.Errors));
             }
 
-            var result = await _signInManager.PasswordSignInAsync(dto.Email,
-                dto.Password, isPersistent: false, lockoutOnFailure: false);
+            var result = await _signInManager.PasswordSignInAsync(requisicao.Email,
+                requisicao.Password, isPersistent: false, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
-                return Ok(GeraToken(dto));
+                return Ok(GeraToken(requisicao));
             }
             else
             {
@@ -81,12 +81,11 @@ namespace iPraiseYou.API.Controllers
         }
 
 
-        private UsuarioToken GeraToken(UsuarioDTO dto)
+        private UsuarioToken GeraToken(UsuarioRequisicao requisicao)
         {
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.UniqueName, dto.Email),
-                new Claim("musico", "rodrigo"),
+                new Claim(JwtRegisteredClaimNames.UniqueName, requisicao.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
@@ -107,7 +106,7 @@ namespace iPraiseYou.API.Controllers
                 Authenticated = true,
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 Expiration = expiration,
-                Message = "Token gerado!"
+                Message = "Token gerado."
             };
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace PraiseYou.Domain.MusicoLouvor.Interface
+﻿namespace PraiseYou.Domain.Musicos.Interface
 {
     public interface MusicoRepository
     {

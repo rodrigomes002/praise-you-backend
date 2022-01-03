@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace iPraiseYou.API.DTO
+namespace PraiseYou.Application.Usuario
 {
     public class UsuarioToken
     {

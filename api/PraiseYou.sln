@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PraiseYou.API", "PraiseYou.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PraiseYou.Test", "PraiseYou.Test\PraiseYou.Test.csproj", "{48216EBE-48D7-48D2-98B9-847A6F068CB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraiseYou.Domain", "PraiseYou.Domain\PraiseYou.Domain.csproj", "{67B628EE-6230-4AAB-A432-4346A6913E01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PraiseYou.Domain", "PraiseYou.Domain\PraiseYou.Domain.csproj", "{67B628EE-6230-4AAB-A432-4346A6913E01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraiseYou.Infrastructure", "PraiseYou.Infrastructure\PraiseYou.Infrastructure.csproj", "{25002EC6-296B-4F2A-9EAC-2E55C2B299C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PraiseYou.Infrastructure", "PraiseYou.Infrastructure\PraiseYou.Infrastructure.csproj", "{25002EC6-296B-4F2A-9EAC-2E55C2B299C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraiseYou.Application", "PraiseYou.Application\PraiseYou.Application.csproj", "{2A948FBA-DFBA-45B9-8B9A-8D67F876F74E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{25002EC6-296B-4F2A-9EAC-2E55C2B299C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25002EC6-296B-4F2A-9EAC-2E55C2B299C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25002EC6-296B-4F2A-9EAC-2E55C2B299C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A948FBA-DFBA-45B9-8B9A-8D67F876F74E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A948FBA-DFBA-45B9-8B9A-8D67F876F74E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A948FBA-DFBA-45B9-8B9A-8D67F876F74E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A948FBA-DFBA-45B9-8B9A-8D67F876F74E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

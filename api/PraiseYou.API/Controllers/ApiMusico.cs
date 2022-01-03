@@ -1,12 +1,10 @@
-﻿using iPraiseYou.API.Data;
-using iPraiseYou.API.Entities;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace iPraiseYou.API.Controllers
+namespace PraiseYou.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

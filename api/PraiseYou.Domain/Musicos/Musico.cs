@@ -1,6 +1,6 @@
-﻿using PraiseYou.Domain.EscalaLouvor;
+﻿using PraiseYou.Domain.Escalas;
 
-namespace PraiseYou.Domain.MusicoLouvor
+namespace PraiseYou.Domain.Musicos
 {
     public class Musico
     {

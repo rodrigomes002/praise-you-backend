@@ -1,6 +1,6 @@
-﻿namespace iPraiseYou.API.DTO
+﻿namespace PraiseYou.Application.Usuario
 {
-    public class UsuarioDTO
+    public class UsuarioRequisicao
     {
         public string Email { get; set; }
         public string Password { get; set; }

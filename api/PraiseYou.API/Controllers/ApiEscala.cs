@@ -1,33 +1,28 @@
-﻿using iPraiseYou.API.Data;
-using iPraiseYou.API.Entities;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PraiseYou.Application.Escalas;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace iPraiseYou.API.Controllers
+namespace PraiseYou.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = "Bearer")]
     public class ApiEscala : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly EscalaFacade escalaFacade;
 
-        public ApiEscala(DataContext context)
+        public ApiEscala(EscalaFacade escalaFacade)
         {
-            _context = context;
+            this.escalaFacade = escalaFacade;
         }
 
-        // GET: api/Escalas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Escala>>> Get()
+        public ActionResult Listar()
         {
-            return await _context.Escalas.AsNoTracking()
-                .Include(m => m.Musicos)
-                .Include(m => m.Musicas)
-                .ToListAsync();
+            return Ok(this.escalaFacade.Listar());
         }
 
         // GET: api/Escalas/5
