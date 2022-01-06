@@ -1,6 +1,8 @@
-﻿using PraiseYou.Domain.Escalas;
+﻿using Microsoft.EntityFrameworkCore;
+using PraiseYou.Domain.Escalas;
 using PraiseYou.Domain.Escalas.Interface;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PraiseYou.Infrastructure.EntityFramework
 {

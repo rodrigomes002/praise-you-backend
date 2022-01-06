@@ -9,6 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using PraiseYou.Application.Escalas;
+using PraiseYou.Domain.Escalas.Interface;
+using PraiseYou.Domain.Musicas.Interface;
+using PraiseYou.Domain.Musicos.Interface;
+using PraiseYou.Infrastructure.EntityFramework;
 using System.Text;
 
 namespace PraiseYou.API
@@ -26,10 +31,20 @@ namespace PraiseYou.API
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("iPraiseDB"));
+            services.AddDbContext<ApplicationContext>(options => options.UseInMemoryDatabase("iPraiseDB"));
+
+
+            services.AddScoped<EscalaFacade>();
+            services.AddScoped<EscalaRepository, EFEscalaRepository>();
+            
+            services.AddScoped<MusicaFacade>();
+            services.AddScoped<MusicaRepository, EFMusicaRepository>();
+            
+            services.AddScoped<MusicoFacade>();
+            services.AddScoped<MusicoRepository, EFMusicoRepository>();
 
             services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<DataContext>()
+                .AddEntityFrameworkStores<ApplicationContext>()
                 .AddDefaultTokenProviders();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

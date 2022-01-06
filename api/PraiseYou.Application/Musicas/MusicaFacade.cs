@@ -1,6 +1,20 @@
-﻿namespace PraiseYou.Application.Escalas
+﻿using PraiseYou.Domain;
+using PraiseYou.Domain.Musicas;
+using System.Collections.Generic;
+
+namespace PraiseYou.Application.Escalas
 {
     public class MusicaFacade
     {
+        private readonly UnitOfWork unitOfWork;
+        public MusicaFacade(UnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
+
+        public IEnumerable<Musica> Listar()
+        {
+            return this.unitOfWork.MusicaRepository.ListarTodos();
+        }
     }
 }

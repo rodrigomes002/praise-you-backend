@@ -1,6 +1,6 @@
-﻿using PraiseYou.Domain.EscalaLouvor.Interface;
-using PraiseYou.Domain.MusicaLouvor.Interface;
-using PraiseYou.Domain.MusicoLouvor.Interface;
+﻿using PraiseYou.Domain.Escalas.Interface;
+using PraiseYou.Domain.Musicas.Interface;
+using PraiseYou.Domain.Musicos.Interface;
 
 namespace PraiseYou.Domain
 {

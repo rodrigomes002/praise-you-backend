@@ -1,20 +1,20 @@
-﻿using PraiseYou.Domain.Escalas;
-using PraiseYou.Domain.Escalas.Interface;
+﻿using PraiseYou.Domain;
+using PraiseYou.Domain.Escalas;
 using System.Collections.Generic;
 
 namespace PraiseYou.Application.Escalas
 {
     public class EscalaFacade
     {
-        private readonly EscalaRepository escalaRepository;
-        public EscalaFacade(EscalaRepository escalaRepository)
+        private readonly UnitOfWork unitOfWork;
+        public EscalaFacade(UnitOfWork unitOfWork)
         {
-            this.escalaRepository = escalaRepository;
+            this.unitOfWork = unitOfWork;
         }
 
         public IEnumerable<Escala> Listar()
         {
-            return this.escalaRepository.ListarTodos();
+            return this.unitOfWork.EscalaRepository.ListarTodos();
         }
     }
 }

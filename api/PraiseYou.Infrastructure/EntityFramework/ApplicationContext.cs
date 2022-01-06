@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using PraiseYou.Domain.EscalaLouvor;
-using PraiseYou.Domain.MusicaLouvor;
-using PraiseYou.Domain.MusicoLouvor;
+using PraiseYou.Domain.Escalas;
+using PraiseYou.Domain.Musicas;
+using PraiseYou.Domain.Musicos;
 
 namespace PraiseYou.Infrastructure.EntityFramework
 {

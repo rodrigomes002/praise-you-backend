@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PraiseYou.Application.Escalas;
+using PraiseYou.Domain.Musicos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,18 +13,17 @@ namespace PraiseYou.API.Controllers
     [Authorize(AuthenticationSchemes = "Bearer")]
     public class ApiMusico : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly MusicoFacade musicoFacade;
 
-        public ApiMusico(DataContext context)
+        public ApiMusico(MusicoFacade musicoFacade)
         {
-            _context = context;
+            this.musicoFacade = musicoFacade;
         }
 
-        // GET: api/Musicos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Musico>>> Get()
+        public ActionResult<IEnumerable<Musico>> Listar()
         {
-            return await _context.Musicos.AsNoTracking().ToListAsync();
+            return Ok(this.musicoFacade.Listar());
         }
 
         // GET: api/Musicos/5
