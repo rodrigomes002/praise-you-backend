@@ -19,5 +19,9 @@ namespace PraiseYou.Infrastructure.EntityFramework
         {
             return this.context.Musicos.AsNoTracking().ToList();
         }
+        public Musico ListarPorId(int id)
+        {
+            return this.context.Musicos.Where(e => e.Id == id).FirstOrDefault();
+        }
     }
 }

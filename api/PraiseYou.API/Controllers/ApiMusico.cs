@@ -28,9 +28,9 @@ namespace PraiseYou.API.Controllers
 
         // GET: api/Musicos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Musico>> Get(int id)
+        public ActionResult<Musico> Listar(int id)
         {
-            var musico = await _context.Musicos.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
+            var musico = this.musicoFacade.ListarPorId(id);
 
             if (musico == null)
             {

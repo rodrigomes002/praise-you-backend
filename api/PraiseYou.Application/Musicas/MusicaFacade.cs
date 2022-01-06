@@ -16,5 +16,10 @@ namespace PraiseYou.Application.Escalas
         {
             return this.unitOfWork.MusicaRepository.ListarTodos();
         }
+
+        public Musica ListarPorId(int id)
+        {
+            return this.unitOfWork.MusicaRepository.ListarPorId(id);
+        }
     }
 }

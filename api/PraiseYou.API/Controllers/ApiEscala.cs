@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PraiseYou.Application.Escalas;
+using PraiseYou.Domain.Escalas;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -25,11 +26,10 @@ namespace PraiseYou.API.Controllers
             return Ok(this.escalaFacade.Listar());
         }
 
-        // GET: api/Escalas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Escala>> Get(int id)
+        public ActionResult<Escala> Listar(int id)
         {
-            var escala = await _context.Escalas.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
+            var escala = this.escalaFacade.ListarPorId(id);
 
             if (escala == null)
             {

@@ -26,11 +26,10 @@ namespace PraiseYou.API.Controllers
             return Ok(this.musicaFacade.Listar());
         }
 
-        // GET: api/Musicas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Musica>> Get(int id)
+        public ActionResult<Musica> Listar(int id)
         {
-            var musica = await _context.Musicas.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
+            var musica = this.musicaFacade.ListarPorId(id);
 
             if (musica == null)
             {

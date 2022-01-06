@@ -5,5 +5,6 @@ namespace PraiseYou.Domain.Escalas.Interface
     public interface EscalaRepository
     {
         IEnumerable<Escala> ListarTodos();
+        Escala ListarPorId(int id);
     }
 }

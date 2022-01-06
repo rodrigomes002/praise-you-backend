@@ -17,10 +17,15 @@ namespace PraiseYou.Infrastructure.EntityFramework
 
         public IEnumerable<Escala> ListarTodos()
         {
-            return context.Escalas.AsNoTracking()
+            return this.context.Escalas.AsNoTracking()
                .Include(m => m.Musicos)
                .Include(m => m.Musicas)
                .ToList();
+        }
+
+        public Escala ListarPorId(int id)
+        {
+            return this.context.Escalas.Where(e => e.Id == id).FirstOrDefault();
         }
     }
 }
