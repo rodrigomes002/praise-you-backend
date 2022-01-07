@@ -6,7 +6,7 @@ using PraiseYou.Domain.Musicos;
 
 namespace PraiseYou.Infrastructure.EntityFramework
 {
-    public class ApplicationContext : IdentityDbContext
+    public class ApplicationContext : DbContext
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {

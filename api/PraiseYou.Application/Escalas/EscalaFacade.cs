@@ -1,5 +1,7 @@
-﻿using PraiseYou.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using PraiseYou.Domain;
 using PraiseYou.Domain.Escalas;
+using System;
 using System.Collections.Generic;
 
 namespace PraiseYou.Application.Escalas
@@ -20,6 +22,6 @@ namespace PraiseYou.Application.Escalas
         public Escala ListarPorId(int id)
         {
             return this.unitOfWork.EscalaRepository.ListarPorId(id);
-        }
+        }       
     }
 }

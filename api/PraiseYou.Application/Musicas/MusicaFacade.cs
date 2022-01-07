@@ -21,5 +21,20 @@ namespace PraiseYou.Application.Escalas
         {
             return this.unitOfWork.MusicaRepository.ListarPorId(id);
         }
+
+        public void Atualizar(Musica requisicao)
+        {
+            var escala = this.unitOfWork.MusicaRepository.ListarPorId(requisicao.Id);
+
+            if (escala is null)
+            {
+                throw new DefaultAppException("Música não encontrada.");
+            }
+
+            escala.Nome = requisicao.Nome;
+            escala.Tom = requisicao.Tom;
+            escala.Artista = requisicao.Artista;
+            this.unitOfWork.Commit();
+        }
     }
 }
