@@ -5,9 +5,9 @@ namespace PraiseYou.Domain.Musicas
     public class Musica
     {
         public int Id { get; set; }
-        public string Nome { get; private set; }
-        public string Artista { get; private set; }
-        public string Tom { get; private set; }
+        public string Nome { get; set; }
+        public string Artista { get; set; }
+        public string Tom { get; set; }
 
         public Escala Escala { get; set; }
         public int EscalaId { get; set; }
