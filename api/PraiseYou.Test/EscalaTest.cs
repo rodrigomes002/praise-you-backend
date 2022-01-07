@@ -1,4 +1,4 @@
-﻿using iPraiseYou.API.Entities;
+﻿using PraiseYou.Domain.Escalas;
 using System;
 using Xunit;
 

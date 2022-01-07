@@ -1,4 +1,4 @@
-﻿using iPraiseYou.API.Entities;
+﻿using PraiseYou.Domain.Musicos;
 using Xunit;
 
 namespace PraiseYou.Test
