@@ -1,17 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using PraiseYou.Application.Escalas;
 using PraiseYou.Domain.Escalas;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using System;
 
 namespace PraiseYou.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Bearer")]
-    public class ApiEscala : ControllerBase
+    [Authorize]
+    public class ApiEscala : AbstractApi
     {
         private readonly EscalaFacade escalaFacade;
 
@@ -23,63 +21,30 @@ namespace PraiseYou.API.Controllers
         [HttpGet]
         public ActionResult Listar()
         {
-            return Ok(this.escalaFacade.Listar());
+            try
+            {
+                var escalas = this.escalaFacade.Listar();
+                return Success(escalas);
+            }
+            catch (Exception e)
+            {
+                return Error(e);
+            }
+            
         }
 
         [HttpGet("{id}")]
         public ActionResult<Escala> Listar(int id)
         {
-            var escala = this.escalaFacade.ListarPorId(id);
-
-            if (escala == null)
+            try
             {
-                return NotFound();
+                var escala = this.escalaFacade.ListarPorId(id);
+                return Success(escala);
             }
-
-            return escala;
-        }
-
-        // PUT: api/Escalas/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Escala escala)
-        {
-            if (id != escala.Id)
+            catch (Exception e)
             {
-                return BadRequest();
+                return Error(e);
             }
-
-            _context.Entry(escala).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return Ok();
-
-        }
-
-        // POST: api/Escalas
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Escala>> Post([FromBody] Escala escala)
-        {
-            _context.Escalas.Add(escala);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("Get", new { id = escala.Id }, escala);
-        }
-
-        // DELETE: api/Escalas/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var escala = await _context.Escalas.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
-            if (escala == null)
-            {
-                return NotFound();
-            }
-
-            _context.Escalas.Remove(escala);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
+        }      
     }
 }
