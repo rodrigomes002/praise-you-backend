@@ -6,6 +6,8 @@ namespace PraiseYou.Domain.Musicos.Interface
     {
         IEnumerable<Musico> ListarTodos();
         Musico ListarPorId(int id);
+        void Cadastrar(Musico musico);
+        void Atualizar(Musico musico);
 
     }
 }

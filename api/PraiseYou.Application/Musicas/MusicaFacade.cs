@@ -1,4 +1,5 @@
-﻿using PraiseYou.Domain;
+﻿using PraiseYou.Application.Musicas;
+using PraiseYou.Domain;
 using PraiseYou.Domain.Musicas;
 using System.Collections.Generic;
 
@@ -22,18 +23,31 @@ namespace PraiseYou.Application.Escalas
             return this.unitOfWork.MusicaRepository.ListarPorId(id);
         }
 
-        public void Atualizar(Musica requisicao)
+        public void Atualizar(MusicaRequisicao requisicao)
         {
-            var escala = this.unitOfWork.MusicaRepository.ListarPorId(requisicao.Id);
+            var musica = this.unitOfWork.MusicaRepository.ListarPorId(requisicao.Id);
 
-            if (escala is null)
+            if (musica is null)
             {
                 throw new DefaultAppException("Música não encontrada.");
             }
 
-            escala.Nome = requisicao.Nome;
-            escala.Tom = requisicao.Tom;
-            escala.Artista = requisicao.Artista;
+            //TODO: Validação
+
+            musica.Nome = requisicao.Nome;
+            musica.Tom = requisicao.Tom;
+            musica.Artista = requisicao.Artista;
+            this.unitOfWork.MusicaRepository.Atualizar(musica);
+            this.unitOfWork.Commit();
+        }
+
+        public void Cadastrar(MusicaRequisicao requisicao)
+        {
+
+            //TODO: Validação
+
+            var musica = new Musica(requisicao.Nome, requisicao.Artista, requisicao.Tom);
+            this.unitOfWork.MusicaRepository.Cadastrar(musica);
             this.unitOfWork.Commit();
         }
     }

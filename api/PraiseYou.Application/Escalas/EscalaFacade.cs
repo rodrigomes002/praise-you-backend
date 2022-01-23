@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PraiseYou.Domain;
+﻿using PraiseYou.Domain;
 using PraiseYou.Domain.Escalas;
-using System;
 using System.Collections.Generic;
 
 namespace PraiseYou.Application.Escalas

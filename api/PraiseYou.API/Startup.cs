@@ -1,4 +1,3 @@
-using iPraiseYou.API.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PraiseYou.Application.Escalas;
+using PraiseYou.Domain;
 using PraiseYou.Domain.Escalas.Interface;
 using PraiseYou.Domain.Musicas.Interface;
 using PraiseYou.Domain.Musicos.Interface;
@@ -30,9 +30,7 @@ namespace PraiseYou.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<ApplicationContext>(options => options.UseInMemoryDatabase("iPraiseDB"));
-
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<EscalaFacade>();
             services.AddScoped<EscalaRepository, EFEscalaRepository>();
@@ -42,6 +40,8 @@ namespace PraiseYou.API
             
             services.AddScoped<MusicoFacade>();
             services.AddScoped<MusicoRepository, EFMusicoRepository>();
+
+            services.AddScoped<UnitOfWork, EFUnitOfWork>();
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationContext>()
@@ -71,7 +71,7 @@ namespace PraiseYou.API
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "iPraiseYou.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PraiseYou.API", Version = "v1" });
             });
         }
 
@@ -82,7 +82,7 @@ namespace PraiseYou.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "iPraiseYou.API v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PraiseYou.API v1"));
             }
 
             app.UseHttpsRedirection();

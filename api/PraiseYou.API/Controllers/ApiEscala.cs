@@ -6,7 +6,7 @@ using System;
 
 namespace PraiseYou.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/escalas")]
     [ApiController]
     [Authorize]
     public class ApiEscala : AbstractApi

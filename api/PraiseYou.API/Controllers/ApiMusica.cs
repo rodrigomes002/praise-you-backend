@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using PraiseYou.Application.Escalas;
+using PraiseYou.Application.Musicas;
 using PraiseYou.Domain.Musicas;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace PraiseYou.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/musicas")]
     [ApiController]
     [Authorize]
     public class ApiMusica : AbstractApi
@@ -50,8 +49,8 @@ namespace PraiseYou.API.Controllers
            
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Atualizar([FromBody] Musica requisicao)
+        [HttpPut("atualziar")]
+        public IActionResult Atualizar([FromBody] MusicaRequisicao requisicao)
         {
             try
             {
@@ -63,6 +62,21 @@ namespace PraiseYou.API.Controllers
             {
                 return Error(e);
             }
-        }      
+        }
+
+        [HttpPost("cadastrar")]
+        public IActionResult Cadastrar([FromBody] MusicaRequisicao requisicao)
+        {
+            try
+            {
+                this.musicaFacade.Cadastrar(requisicao);
+                return Success();
+
+            }
+            catch (Exception e)
+            {
+                return Error(e);
+            }
+        }
     }
 }

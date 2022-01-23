@@ -23,5 +23,15 @@ namespace PraiseYou.Infrastructure.EntityFramework
         {
             return this.context.Musicos.Where(e => e.Id == id).FirstOrDefault();
         }
+
+        public void Cadastrar(Musico musico)
+        {
+            this.context.Musicos.Add(musico);
+        }
+
+        public void Atualizar(Musico musico)
+        {
+            this.context.Musicos.Update(musico);
+        }
     }
 }
