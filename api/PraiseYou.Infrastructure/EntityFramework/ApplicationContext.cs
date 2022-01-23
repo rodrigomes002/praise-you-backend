@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PraiseYou.Domain.Escalas;
 using PraiseYou.Domain.Musicas;
 using PraiseYou.Domain.Musicos;
+using System;
 
 namespace PraiseYou.Infrastructure.EntityFramework
 {
@@ -17,18 +17,11 @@ namespace PraiseYou.Infrastructure.EntityFramework
         public DbSet<Escala> Escalas { get; set; }
 
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    if (!optionsBuilder.IsConfigured)
-        //    {
-        //        IConfigurationRoot configuration = new ConfigurationBuilder()
-        //            .SetBasePath(Directory.GetCurrentDirectory())
-        //            .AddJsonFile("appsettings.json")
-        //            .Build();
-
-        //        var connectionString = configuration.GetConnectionString("DefaultConnection");
-        //        optionsBuilder.UseInMemoryDatabase(connectionString);
-        //    }
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Musico>().HasData(new Musico(nome: "Rodrigo", instrumento: "Guitarra") { Id = 1, EscalaId = 1 });
+            modelBuilder.Entity<Musica>().HasData(new Musica(nome: "O Tempo", artista: "Oficina G3", tom: "C") { Id = 1, EscalaId = 1 });
+            modelBuilder.Entity<Escala>().HasData(new Escala(dataEnsaio: DateTime.Now, dataParticipacao: DateTime.Now) { Id = 1 });
+        }
     }
 }
