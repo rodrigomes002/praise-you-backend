@@ -14,7 +14,7 @@ namespace PraiseYou.API.Controllers
 {
     [Route("api/autoriza")]
     [ApiController]
-    public class ApiAutoriza : ControllerBase
+    public class ApiAutoriza : AbstractApi
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -55,7 +55,7 @@ namespace PraiseYou.API.Controllers
             }
 
             await _signInManager.SignInAsync(user, false);
-            return Ok(GeraToken(requisicao));
+            return Success(GeraToken(requisicao));
         }
 
         [HttpPost("login")]
@@ -71,7 +71,7 @@ namespace PraiseYou.API.Controllers
 
             if (result.Succeeded)
             {
-                return Ok(GeraToken(requisicao));
+                return Success(GeraToken(requisicao));
             }
             else
             {
