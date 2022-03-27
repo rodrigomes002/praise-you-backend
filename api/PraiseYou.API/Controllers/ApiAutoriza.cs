@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PraiseYou.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/autoriza")]
     [ApiController]
     public class ApiAutoriza : ControllerBase
     {
@@ -44,7 +44,7 @@ namespace PraiseYou.API.Controllers
             {
                 UserName = requisicao.Email,
                 Email = requisicao.Email,
-                EmailConfirmed = true
+                EmailConfirmed = false
             };
 
             var result = await _userManager.CreateAsync(user, requisicao.Password);

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PraiseYou.Application.Escalas;
 using PraiseYou.Domain.Escalas;
 using System;
+using System.Collections.Generic;
 
 namespace PraiseYou.API.Controllers
 {
@@ -19,7 +20,7 @@ namespace PraiseYou.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult Listar()
+        public ActionResult<IEnumerable<Escala>> Listar()
         {
             try
             {
@@ -29,8 +30,7 @@ namespace PraiseYou.API.Controllers
             catch (Exception e)
             {
                 return Error(e);
-            }
-            
+            }            
         }
 
         [HttpGet("{id}")]

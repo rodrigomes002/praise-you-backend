@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using PraiseYou.Application.Escalas;
 using PraiseYou.Application.Musicos;
 using PraiseYou.Domain.Musicos;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace PraiseYou.API.Controllers
 {
