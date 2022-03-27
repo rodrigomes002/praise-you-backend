@@ -17,5 +17,14 @@ namespace PraiseYou.Test
             Assert.Equal(nome, musico.Nome);
             Assert.Equal(instrumento, musico.Instrumento);
         }
+
+        [Theory]
+        [InlineData("Duca","Baixo")]
+        [InlineData("PG", "Vocal")]
+        public void DeveCriarVariosMusicos(string nome, string instrumento)
+        {
+            var musico = new Musico(nome, instrumento);
+            Assert.Equal(nome, musico.Nome);
+        }
     }
 }

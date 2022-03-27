@@ -17,5 +17,17 @@ namespace PraiseYou.Test
             Assert.Equal(dataParticipacao, escala.DataParticipacao);
             Assert.Equal(dataEnsaio, escala.DataEnsaio);
         }
+
+        [Theory]
+        [InlineData("27/03/2022", "27/03/2022")]
+        [InlineData("25/03/2022", "25/03/2022")]
+        public void DeveCriarVariasEscalas(string dataParticipacao, string dataEnsaio)
+        {
+            DateTime dataParticipacaoConvertida = DateTime.Parse(dataParticipacao);
+            DateTime dataEnsaioConvertida = DateTime.Parse(dataEnsaio);
+
+            var escala = new Escala(dataParticipacaoConvertida, dataEnsaioConvertida);
+            Assert.Equal(dataParticipacaoConvertida, escala.DataParticipacao);
+        }
     }
 }
