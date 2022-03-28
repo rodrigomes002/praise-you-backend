@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PraiseYou.Application.Escalas;
 using PraiseYou.Application.Musicos;
 using PraiseYou.Domain.Musicos;
@@ -14,10 +15,12 @@ namespace PraiseYou.API.Controllers
     public class ApiMusico : AbstractApi
     {
         private readonly MusicoFacade musicoFacade;
+        private readonly ILogger<ApiMusico> logger;
 
-        public ApiMusico(MusicoFacade musicoFacade)
+        public ApiMusico(MusicoFacade musicoFacade, ILogger<ApiMusico> logger)
         {
             this.musicoFacade = musicoFacade;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -25,6 +28,7 @@ namespace PraiseYou.API.Controllers
         {
             try
             {
+                logger.LogInformation("REQUISICAO - Buscando todos os musicos.");
                 var resultado = this.musicoFacade.Listar();
                 return Success(resultado);
             }
@@ -32,7 +36,7 @@ namespace PraiseYou.API.Controllers
             {
                 return Error(e);
             }
-            
+
         }
 
         [HttpGet("{id}")]
@@ -41,6 +45,7 @@ namespace PraiseYou.API.Controllers
 
             try
             {
+                logger.LogInformation("REQUISICAO - Buscando musico por id: " + id);
                 var resultado = this.musicoFacade.ListarPorId(id);
                 return Success(resultado);
             }
@@ -55,6 +60,7 @@ namespace PraiseYou.API.Controllers
         {
             try
             {
+                logger.LogInformation("REQUISICAO - Atualizando um musico");
                 this.musicoFacade.Atualizar(requisicao);
                 return Success();
 
@@ -70,6 +76,7 @@ namespace PraiseYou.API.Controllers
         {
             try
             {
+                logger.LogInformation("REQUISICAO - Cadastrando um musico");
                 this.musicoFacade.Cadastrar(requisicao);
                 return Success();
 

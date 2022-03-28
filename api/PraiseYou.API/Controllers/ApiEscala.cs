@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PraiseYou.Application.Escalas;
 using PraiseYou.Domain.Escalas;
 using System;
@@ -13,10 +14,12 @@ namespace PraiseYou.API.Controllers
     public class ApiEscala : AbstractApi
     {
         private readonly EscalaFacade escalaFacade;
+        private readonly ILogger<ApiEscala> logger;
 
-        public ApiEscala(EscalaFacade escalaFacade)
+        public ApiEscala(EscalaFacade escalaFacade, ILogger<ApiEscala> logger)
         {
             this.escalaFacade = escalaFacade;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -24,7 +27,8 @@ namespace PraiseYou.API.Controllers
         {
             try
             {
-                var escalas = this.escalaFacade.Listar();
+                logger.LogInformation("REQUISICAO - Buscando todas as escalas.");
+                var escalas = this.escalaFacade.Listar();                
                 return Success(escalas);
             }
             catch (Exception e)
@@ -38,6 +42,7 @@ namespace PraiseYou.API.Controllers
         {
             try
             {
+                logger.LogInformation("REQUISICAO - Buscando escala por id: "+ id);
                 var escala = this.escalaFacade.ListarPorId(id);
                 return Success(escala);
             }

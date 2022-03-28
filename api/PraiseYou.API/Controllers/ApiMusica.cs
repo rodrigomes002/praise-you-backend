@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PraiseYou.Application.Escalas;
 using PraiseYou.Application.Musicas;
 using PraiseYou.Domain.Musicas;
@@ -14,10 +15,12 @@ namespace PraiseYou.API.Controllers
     public class ApiMusica : AbstractApi
     {
         private readonly MusicaFacade musicaFacade;
+        private readonly ILogger<ApiMusica> logger;
 
-        public ApiMusica(MusicaFacade musicaFacade)
+        public ApiMusica(MusicaFacade musicaFacade, ILogger<ApiMusica> logger)
         {
             this.musicaFacade = musicaFacade;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -25,6 +28,7 @@ namespace PraiseYou.API.Controllers
         {
             try
             {
+                logger.LogInformation("REQUISICAO - Buscando todas as musicas.");
                 var musicas = this.musicaFacade.Listar();
                 return Success(musicas);
             }
@@ -39,6 +43,7 @@ namespace PraiseYou.API.Controllers
         {
             try
             {
+                logger.LogInformation("REQUISICAO - Buscando musica por id: " + id);
                 var musica = this.musicaFacade.ListarPorId(id);
                 return Success(musica);
             }
@@ -54,6 +59,7 @@ namespace PraiseYou.API.Controllers
         {
             try
             {
+                logger.LogInformation("REQUISICAO - Atualizando uma musica");
                 this.musicaFacade.Atualizar(requisicao);
                 return Success();
 
@@ -69,6 +75,7 @@ namespace PraiseYou.API.Controllers
         {
             try
             {
+                logger.LogInformation("REQUISICAO - Cadastrando uma musica");
                 this.musicaFacade.Cadastrar(requisicao);
                 return Success();
 
