@@ -17,7 +17,7 @@ namespace PraiseYou.Infrastructure.EntityFramework
 
         public IEnumerable<Escala> ListarTodos()
         {
-            return this.context.Escalas.AsNoTracking()
+            return this.context.Escalas
                .Include(m => m.Musicos)
                .Include(m => m.Musicas)
                .ToList();

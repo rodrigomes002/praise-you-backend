@@ -33,5 +33,10 @@ namespace PraiseYou.Infrastructure.EntityFramework
         {
             this.context.Musicos.Update(musico);
         }
+
+        public void Deletar(Musico musico)
+        {
+            this.context.Musicos.Remove(musico);
+        }
     }
 }

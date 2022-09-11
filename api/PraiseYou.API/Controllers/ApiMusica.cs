@@ -11,7 +11,7 @@ namespace PraiseYou.API.Controllers
 {
     [Route("api/musicas")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ApiMusica : AbstractApi
     {
         private readonly MusicaFacade musicaFacade;

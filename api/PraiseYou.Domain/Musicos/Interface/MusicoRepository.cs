@@ -8,6 +8,7 @@ namespace PraiseYou.Domain.Musicos.Interface
         Musico ListarPorId(int id);
         void Cadastrar(Musico musico);
         void Atualizar(Musico musico);
+        void Deletar(Musico musico);
 
     }
 }

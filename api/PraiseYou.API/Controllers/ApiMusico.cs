@@ -11,7 +11,7 @@ namespace PraiseYou.API.Controllers
 {
     [Route("api/musicos")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ApiMusico : AbstractApi
     {
         private readonly MusicoFacade musicoFacade;
@@ -80,6 +80,22 @@ namespace PraiseYou.API.Controllers
                 this.musicoFacade.Cadastrar(requisicao);
                 return Success();
 
+            }
+            catch (Exception e)
+            {
+                return Error(e);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<Musico> Deletar(int id)
+        {
+
+            try
+            {
+                logger.LogInformation("REQUISICAO - Buscando musico por id: " + id);
+                this.musicoFacade.Deletar(id);
+                return Success();
             }
             catch (Exception e)
             {

@@ -48,5 +48,12 @@ namespace PraiseYou.Application.Escalas
             this.unitOfWork.MusicoRepository.Cadastrar(musico);
             this.unitOfWork.Commit();
         }
+
+        public void Deletar(int id)
+        {
+            var musico = this.unitOfWork.MusicoRepository.ListarPorId(id);
+            this.unitOfWork.MusicoRepository.Deletar(musico);
+            this.unitOfWork.Commit();
+        }
     }
 }
