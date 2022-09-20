@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PraiseYou.Application.Escalas;
+using PraiseYou.Application.Identity;
 using PraiseYou.Domain;
 using PraiseYou.Domain.Escalas.Interface;
 using PraiseYou.Domain.Musicas.Interface;
@@ -45,7 +46,8 @@ namespace PraiseYou.API
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationContext>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders()
+                .AddErrorDescriber<CustomIdentityErrorDescriber>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters
