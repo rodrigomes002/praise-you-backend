@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31205.134
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PraiseYou.API", "PraiseYou.API\PraiseYou.API.csproj", "{27C1B286-E40C-4F0F-AEFD-E7596CEAB2FC}"
 EndProject
@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PraiseYou.Domain", "PraiseY
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PraiseYou.Infrastructure", "PraiseYou.Infrastructure\PraiseYou.Infrastructure.csproj", "{25002EC6-296B-4F2A-9EAC-2E55C2B299C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraiseYou.Application", "PraiseYou.Application\PraiseYou.Application.csproj", "{2A948FBA-DFBA-45B9-8B9A-8D67F876F74E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PraiseYou.Application", "PraiseYou.Application\PraiseYou.Application.csproj", "{2A948FBA-DFBA-45B9-8B9A-8D67F876F74E}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4E7BC268-A33D-4405-9411-65BB6CF81704}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{2A948FBA-DFBA-45B9-8B9A-8D67F876F74E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A948FBA-DFBA-45B9-8B9A-8D67F876F74E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A948FBA-DFBA-45B9-8B9A-8D67F876F74E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E7BC268-A33D-4405-9411-65BB6CF81704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E7BC268-A33D-4405-9411-65BB6CF81704}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E7BC268-A33D-4405-9411-65BB6CF81704}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E7BC268-A33D-4405-9411-65BB6CF81704}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
