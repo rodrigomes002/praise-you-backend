@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using PraiseYou.Application.Usuario;
+using PraiseYou.Domain.Musicos;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -24,12 +26,6 @@ namespace PraiseYou.API.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
-        }
-
-        [HttpGet]
-        public ActionResult<string> Get()
-        {
-            return "AutorizaController :: Acessado em : " + DateTime.Now.ToLongDateString();
         }
 
         [HttpPost("register")]

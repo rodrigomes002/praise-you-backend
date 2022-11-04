@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using PraiseYou.Application.Escalas;
 using PraiseYou.Application.Musicas;
 using PraiseYou.Domain.Musicas;
+using PraiseYou.Domain.Musicos;
 using System;
 using System.Collections.Generic;
 
@@ -79,6 +80,22 @@ namespace PraiseYou.API.Controllers
                 this.musicaFacade.Cadastrar(requisicao);
                 return Success();
 
+            }
+            catch (Exception e)
+            {
+                return Error(e);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<Musico> Deletar(int id)
+        {
+
+            try
+            {
+                logger.LogInformation("REQUISICAO - Deletando musica por id: " + id);
+                this.musicaFacade.Deletar(id);
+                return Success();
             }
             catch (Exception e)
             {

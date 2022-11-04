@@ -8,6 +8,7 @@ services:
       dockerfile: PraiseYou.API/Dockerfile
     depends_on:
       - sqlserver
+    command: ["dotnet","ef","database update"]
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2017-CU31-ubuntu-18.04
     hostname: 'sqlserver'

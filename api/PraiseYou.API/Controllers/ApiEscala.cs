@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PraiseYou.Application.Escalas;
+using PraiseYou.Application.Musicas;
 using PraiseYou.Domain.Escalas;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace PraiseYou.API.Controllers
 {
     [Route("api/escalas")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ApiEscala : AbstractApi
     {
         private readonly EscalaFacade escalaFacade;
@@ -50,6 +51,22 @@ namespace PraiseYou.API.Controllers
             {
                 return Error(e);
             }
-        }      
+        }
+
+        [HttpPost("cadastrar")]
+        public IActionResult Cadastrar([FromBody] EscalaRequisicao requisicao)
+        {
+            try
+            {
+                logger.LogInformation("REQUISICAO - Cadastrando uma musica");
+                this.escalaFacade.Cadastrar(requisicao);
+                return Success();
+
+            }
+            catch (Exception e)
+            {
+                return Error(e);
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PraiseYou.Domain.Musicos;
+using System.Collections.Generic;
 
 namespace PraiseYou.Domain.Musicas.Interface
 {
@@ -8,5 +9,6 @@ namespace PraiseYou.Domain.Musicas.Interface
         Musica ListarPorId(int id);
         void Cadastrar(Musica musica);
         void Atualizar(Musica musica);
+        void Deletar(Musica musica);
     }
 }

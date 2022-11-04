@@ -12,8 +12,8 @@ namespace PraiseYou.Infrastructure.EntityFramework
         {
         }
 
-        public DbSet<Musico> Musicos { get; set; }
-        public DbSet<Musica> Musicas { get; set; }
-        public DbSet<Escala> Escalas { get; set; }
+        public DbSet<Musico> Musico { get; set; }
+        public DbSet<Musica> Musica { get; set; }
+        public DbSet<Escala> Escala { get; set; }
     }
 }

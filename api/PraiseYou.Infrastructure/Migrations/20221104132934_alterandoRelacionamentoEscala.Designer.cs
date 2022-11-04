@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PraiseYou.Infrastructure.EntityFramework;
 
@@ -11,9 +12,10 @@ using PraiseYou.Infrastructure.EntityFramework;
 namespace PraiseYou.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20221104132934_alterandoRelacionamentoEscala")]
+    partial class alterandoRelacionamentoEscala
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,7 +238,7 @@ namespace PraiseYou.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Escala");
+                    b.ToTable("Escalas");
                 });
 
             modelBuilder.Entity("PraiseYou.Domain.Escalas.EscalaItem", b =>
@@ -286,7 +288,7 @@ namespace PraiseYou.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Musica");
+                    b.ToTable("Musicas");
                 });
 
             modelBuilder.Entity("PraiseYou.Domain.Musicos.Musico", b =>
@@ -305,7 +307,7 @@ namespace PraiseYou.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Musico");
+                    b.ToTable("Musicos");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

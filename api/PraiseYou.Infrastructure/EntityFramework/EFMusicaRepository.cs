@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PraiseYou.Domain.Musicas;
 using PraiseYou.Domain.Musicas.Interface;
+using PraiseYou.Domain.Musicos;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,22 +18,27 @@ namespace PraiseYou.Infrastructure.EntityFramework
 
         public IEnumerable<Musica> ListarTodos()
         {
-            return this.context.Musicas.AsNoTracking().ToList();
+            return this.context.Musica.AsNoTracking().ToList();
         }
 
         public Musica ListarPorId(int id)
         {
-            return this.context.Musicas.Where(e => e.Id == id).FirstOrDefault();
+            return this.context.Musica.Where(e => e.Id == id).FirstOrDefault();
         }
 
         public void Cadastrar(Musica musica)
         {
-            this.context.Musicas.Add(musica);
+            this.context.Musica.Add(musica);
         }
 
         public void Atualizar(Musica musica)
         {
-            this.context.Musicas.Update(musica);
+            this.context.Musica.Update(musica);
+        }
+
+        public void Deletar(Musica musica)
+        {
+            this.context.Musica.Remove(musica);
         }
     }
 }
