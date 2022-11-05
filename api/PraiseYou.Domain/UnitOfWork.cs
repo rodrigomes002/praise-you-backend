@@ -7,6 +7,8 @@ namespace PraiseYou.Domain
     public interface UnitOfWork
     {
         EscalaRepository EscalaRepository { get; }
+        EscalaMusicaRepository EscalaMusicaRepository { get; }
+        EscalaMusicoRepository EscalaMusicoRepository { get; }
         MusicaRepository MusicaRepository { get; }
         MusicoRepository MusicoRepository { get; }
         void Commit();       

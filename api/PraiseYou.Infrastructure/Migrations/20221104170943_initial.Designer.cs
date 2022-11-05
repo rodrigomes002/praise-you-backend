@@ -12,8 +12,8 @@ using PraiseYou.Infrastructure.EntityFramework;
 namespace PraiseYou.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20221104132934_alterandoRelacionamentoEscala")]
-    partial class alterandoRelacionamentoEscala
+    [Migration("20221104170943_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -238,35 +238,7 @@ namespace PraiseYou.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Escalas");
-                });
-
-            modelBuilder.Entity("PraiseYou.Domain.Escalas.EscalaItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("EscalaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MusicaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MusicoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EscalaId");
-
-                    b.HasIndex("MusicaId");
-
-                    b.HasIndex("MusicoId");
-
-                    b.ToTable("EscalaItem");
+                    b.ToTable("Escala");
                 });
 
             modelBuilder.Entity("PraiseYou.Domain.Musicas.Musica", b =>
@@ -280,6 +252,9 @@ namespace PraiseYou.Infrastructure.Migrations
                     b.Property<string>("Artista")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EscalaId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
@@ -288,7 +263,9 @@ namespace PraiseYou.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Musicas");
+                    b.HasIndex("EscalaId");
+
+                    b.ToTable("Musica");
                 });
 
             modelBuilder.Entity("PraiseYou.Domain.Musicos.Musico", b =>
@@ -299,6 +276,9 @@ namespace PraiseYou.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("EscalaId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Instrumento")
                         .HasColumnType("nvarchar(max)");
 
@@ -307,7 +287,9 @@ namespace PraiseYou.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Musicos");
+                    b.HasIndex("EscalaId");
+
+                    b.ToTable("Musico");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -361,32 +343,33 @@ namespace PraiseYou.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PraiseYou.Domain.Escalas.EscalaItem", b =>
+            modelBuilder.Entity("PraiseYou.Domain.Musicas.Musica", b =>
                 {
                     b.HasOne("PraiseYou.Domain.Escalas.Escala", "Escala")
-                        .WithMany("Itens")
+                        .WithMany("Musicas")
                         .HasForeignKey("EscalaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PraiseYou.Domain.Musicas.Musica", "Musica")
-                        .WithMany()
-                        .HasForeignKey("MusicaId");
+                    b.Navigation("Escala");
+                });
 
-                    b.HasOne("PraiseYou.Domain.Musicos.Musico", "Musico")
-                        .WithMany()
-                        .HasForeignKey("MusicoId");
+            modelBuilder.Entity("PraiseYou.Domain.Musicos.Musico", b =>
+                {
+                    b.HasOne("PraiseYou.Domain.Escalas.Escala", "Escala")
+                        .WithMany("Musicos")
+                        .HasForeignKey("EscalaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Escala");
-
-                    b.Navigation("Musica");
-
-                    b.Navigation("Musico");
                 });
 
             modelBuilder.Entity("PraiseYou.Domain.Escalas.Escala", b =>
                 {
-                    b.Navigation("Itens");
+                    b.Navigation("Musicas");
+
+                    b.Navigation("Musicos");
                 });
 #pragma warning restore 612, 618
         }

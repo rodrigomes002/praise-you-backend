@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PraiseYou.Domain.Musicas;
 using PraiseYou.Domain.Musicas.Interface;
-using PraiseYou.Domain.Musicos;
 using System.Collections.Generic;
 using System.Linq;
 

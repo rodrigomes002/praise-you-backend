@@ -7,19 +7,22 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PraiseYou.Infrastructure.EntityFramework;
 
+#nullable disable
+
 namespace PraiseYou.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220123152716_AddIdentity")]
-    partial class AddIdentity
+    [Migration("20221105231849_criandoTabelaDeRelacionamentoEscala")]
+    partial class criandoTabelaDeRelacionamentoEscala
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.6")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -45,15 +48,16 @@ namespace PraiseYou.Infrastructure.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -69,7 +73,7 @@ namespace PraiseYou.Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
@@ -134,15 +138,16 @@ namespace PraiseYou.Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -158,7 +163,7 @@ namespace PraiseYou.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -180,7 +185,7 @@ namespace PraiseYou.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("AspNetUserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -195,7 +200,7 @@ namespace PraiseYou.Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("AspNetUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -214,15 +219,16 @@ namespace PraiseYou.Infrastructure.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("PraiseYou.Domain.Escalas.Escala", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("DataEnsaio")
                         .HasColumnType("datetime2");
@@ -232,28 +238,21 @@ namespace PraiseYou.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Escalas");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DataEnsaio = new DateTime(2022, 1, 23, 12, 27, 15, 801, DateTimeKind.Local).AddTicks(9635),
-                            DataParticipacao = new DateTime(2022, 1, 23, 12, 27, 15, 804, DateTimeKind.Local).AddTicks(690)
-                        });
+                    b.ToTable("Escala");
                 });
 
-            modelBuilder.Entity("PraiseYou.Domain.Musicas.Musica", b =>
+            modelBuilder.Entity("PraiseYou.Domain.Escalas.EscalaMusica", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Artista")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EscalaId")
+                    b.Property<int?>("EscalaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -266,27 +265,18 @@ namespace PraiseYou.Infrastructure.Migrations
 
                     b.HasIndex("EscalaId");
 
-                    b.ToTable("Musicas");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Artista = "Oficina G3",
-                            EscalaId = 1,
-                            Nome = "O Tempo",
-                            Tom = "C"
-                        });
+                    b.ToTable("EscalaMusica");
                 });
 
-            modelBuilder.Entity("PraiseYou.Domain.Musicos.Musico", b =>
+            modelBuilder.Entity("PraiseYou.Domain.Escalas.EscalaMusico", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
-                    b.Property<int>("EscalaId")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("EscalaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Instrumento")
@@ -299,16 +289,48 @@ namespace PraiseYou.Infrastructure.Migrations
 
                     b.HasIndex("EscalaId");
 
-                    b.ToTable("Musicos");
+                    b.ToTable("EscalaMusico");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            EscalaId = 1,
-                            Instrumento = "Guitarra",
-                            Nome = "Rodrigo"
-                        });
+            modelBuilder.Entity("PraiseYou.Domain.Musicas.Musica", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Artista")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tom")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Musica");
+                });
+
+            modelBuilder.Entity("PraiseYou.Domain.Musicos.Musico", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Instrumento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Musico");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -362,24 +384,20 @@ namespace PraiseYou.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PraiseYou.Domain.Musicas.Musica", b =>
+            modelBuilder.Entity("PraiseYou.Domain.Escalas.EscalaMusica", b =>
                 {
                     b.HasOne("PraiseYou.Domain.Escalas.Escala", "Escala")
                         .WithMany("Musicas")
-                        .HasForeignKey("EscalaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EscalaId");
 
                     b.Navigation("Escala");
                 });
 
-            modelBuilder.Entity("PraiseYou.Domain.Musicos.Musico", b =>
+            modelBuilder.Entity("PraiseYou.Domain.Escalas.EscalaMusico", b =>
                 {
                     b.HasOne("PraiseYou.Domain.Escalas.Escala", "Escala")
                         .WithMany("Musicos")
-                        .HasForeignKey("EscalaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EscalaId");
 
                     b.Navigation("Escala");
                 });

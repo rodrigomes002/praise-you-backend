@@ -7,5 +7,6 @@ namespace PraiseYou.Domain.Escalas.Interface
         IEnumerable<Escala> ListarTodos();
         Escala ListarPorId(int id);
         void Cadastrar(Escala escala);
+        void Deletar(Escala escala);
     }
 }

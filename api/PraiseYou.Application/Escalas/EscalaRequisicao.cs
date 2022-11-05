@@ -1,13 +1,15 @@
-﻿using System;
+﻿using PraiseYou.Domain.Musicas;
+using PraiseYou.Domain.Musicos;
+using System;
 using System.Collections.Generic;
 
 namespace PraiseYou.Application.Escalas
 {
     public class EscalaRequisicao
     {
-        public List<int> Musicos { get; set; }
-        public List<int> Musicas { get; set; }
-        public string DataEnsaio { get; set; }
-        public string DataEscala { get; set; }
+        public List<Musico> Musicos { get; set; }
+        public List<Musica> Musicas { get; set; }
+        public DateTime DataEnsaio { get; set; }
+        public DateTime DataParticipacao { get; set; }
     }
 }

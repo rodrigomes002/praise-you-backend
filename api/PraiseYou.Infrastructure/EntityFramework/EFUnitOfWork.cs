@@ -11,13 +11,17 @@ namespace PraiseYou.Infrastructure.EntityFramework
         public EFUnitOfWork(ApplicationContext context)
         {
             this.context = context;
-            this.EscalaRepository = new EFEscalaRepository(context);
             this.MusicaRepository = new EFMusicaRepository(context);
             this.MusicoRepository = new EFMusicoRepository(context);
+            this.EscalaRepository = new EFEscalaRepository(context);
+            this.EscalaMusicaRepository = new EFEscalaMusicaRepository(context);
+            this.EscalaMusicoRepository = new EFEscalaMusicoRepository(context);
         }
-        public EscalaRepository EscalaRepository { get; }
         public MusicaRepository MusicaRepository { get; }
         public MusicoRepository MusicoRepository { get; }
+        public EscalaRepository EscalaRepository { get; }
+        public EscalaMusicaRepository EscalaMusicaRepository { get; }
+        public EscalaMusicoRepository EscalaMusicoRepository { get; }
 
         public void Commit()
         {

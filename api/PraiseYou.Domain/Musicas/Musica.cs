@@ -1,13 +1,11 @@
-﻿using PraiseYou.Domain.Escalas;
-
-namespace PraiseYou.Domain.Musicas
+﻿namespace PraiseYou.Domain.Musicas
 {
     public class Musica
     {
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Artista { get; set; }
-        public string Tom { get; set; }        
+        public string Tom { get; set; }
 
         public Musica(string nome, string artista, string tom)
         {
@@ -15,5 +13,7 @@ namespace PraiseYou.Domain.Musicas
             this.Artista = artista;
             this.Tom = tom;
         }
+
+
     }
 }

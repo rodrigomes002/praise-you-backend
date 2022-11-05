@@ -17,18 +17,28 @@ namespace PraiseYou.Infrastructure.EntityFramework
 
         public IEnumerable<Escala> ListarTodos()
         {
-            return this.context.Escala               
+            return this.context.Escala   
+               .Include(m=> m.Musicos)
+               .Include(m => m.Musicas)
                .ToList();
         }
 
         public Escala ListarPorId(int id)
         {
-            return this.context.Escala.Where(e => e.Id == id).FirstOrDefault();
+            return this.context.Escala
+                .Include(m => m.Musicos)
+                .Include(m => m.Musicas)
+                .Where(e => e.Id == id).FirstOrDefault();
         }
 
         public void Cadastrar(Escala escala)
         {
             this.context.Escala.Add(escala);
+        }
+
+        public void Deletar(Escala escala)
+        {
+            this.context.Escala.Remove(escala);
         }
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using PraiseYou.Application.Escalas;
 using PraiseYou.Application.Musicas;
 using PraiseYou.Domain.Escalas;
+using PraiseYou.Domain.Musicos;
 using System;
 using System.Collections.Generic;
 
@@ -58,10 +59,26 @@ namespace PraiseYou.API.Controllers
         {
             try
             {
-                logger.LogInformation("REQUISICAO - Cadastrando uma musica");
+                logger.LogInformation("REQUISICAO - Cadastrando uma escala");
                 this.escalaFacade.Cadastrar(requisicao);
                 return Success();
 
+            }
+            catch (Exception e)
+            {
+                return Error(e);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Deletar(int id)
+        {
+
+            try
+            {
+                logger.LogInformation("REQUISICAO - Buscando escala por id: " + id);
+                this.escalaFacade.Deletar(id);
+                return Success();
             }
             catch (Exception e)
             {

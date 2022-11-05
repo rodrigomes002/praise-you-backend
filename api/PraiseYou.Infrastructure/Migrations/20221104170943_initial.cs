@@ -1,9 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace PraiseYou.Infrastructure.Migrations
 {
-    public partial class AddIdentity : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,6 +46,20 @@ namespace PraiseYou.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Escala",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DataParticipacao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataEnsaio = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Escala", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,12 +168,48 @@ namespace PraiseYou.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.UpdateData(
-                table: "Escalas",
-                keyColumn: "Id",
-                keyValue: 1,
-                columns: new[] { "DataEnsaio", "DataParticipacao" },
-                values: new object[] { new DateTime(2022, 1, 23, 12, 27, 15, 801, DateTimeKind.Local).AddTicks(9635), new DateTime(2022, 1, 23, 12, 27, 15, 804, DateTimeKind.Local).AddTicks(690) });
+            migrationBuilder.CreateTable(
+                name: "Musica",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Artista = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Tom = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EscalaId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Musica", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Musica_Escala_EscalaId",
+                        column: x => x.EscalaId,
+                        principalTable: "Escala",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Musico",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Instrumento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EscalaId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Musico", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Musico_Escala_EscalaId",
+                        column: x => x.EscalaId,
+                        principalTable: "Escala",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -197,6 +249,16 @@ namespace PraiseYou.Infrastructure.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Musica_EscalaId",
+                table: "Musica",
+                column: "EscalaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Musico_EscalaId",
+                table: "Musico",
+                column: "EscalaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -217,17 +279,19 @@ namespace PraiseYou.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Musica");
+
+            migrationBuilder.DropTable(
+                name: "Musico");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
-            migrationBuilder.UpdateData(
-                table: "Escalas",
-                keyColumn: "Id",
-                keyValue: 1,
-                columns: new[] { "DataEnsaio", "DataParticipacao" },
-                values: new object[] { new DateTime(2022, 1, 23, 11, 56, 27, 334, DateTimeKind.Local).AddTicks(6249), new DateTime(2022, 1, 23, 11, 56, 27, 336, DateTimeKind.Local).AddTicks(5909) });
+            migrationBuilder.DropTable(
+                name: "Escala");
         }
     }
 }

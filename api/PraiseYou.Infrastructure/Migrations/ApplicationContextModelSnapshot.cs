@@ -239,7 +239,7 @@ namespace PraiseYou.Infrastructure.Migrations
                     b.ToTable("Escala");
                 });
 
-            modelBuilder.Entity("PraiseYou.Domain.Escalas.EscalaItem", b =>
+            modelBuilder.Entity("PraiseYou.Domain.Escalas.EscalaMusica", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -247,24 +247,47 @@ namespace PraiseYou.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("EscalaId")
+                    b.Property<string>("Artista")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("EscalaId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MusicaId")
-                        .HasColumnType("int");
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MusicoId")
-                        .HasColumnType("int");
+                    b.Property<string>("Tom")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EscalaId");
 
-                    b.HasIndex("MusicaId");
+                    b.ToTable("EscalaMusica");
+                });
 
-                    b.HasIndex("MusicoId");
+            modelBuilder.Entity("PraiseYou.Domain.Escalas.EscalaMusico", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.ToTable("EscalaItem");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("EscalaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Instrumento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EscalaId");
+
+                    b.ToTable("EscalaMusico");
                 });
 
             modelBuilder.Entity("PraiseYou.Domain.Musicas.Musica", b =>
@@ -359,32 +382,29 @@ namespace PraiseYou.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PraiseYou.Domain.Escalas.EscalaItem", b =>
+            modelBuilder.Entity("PraiseYou.Domain.Escalas.EscalaMusica", b =>
                 {
                     b.HasOne("PraiseYou.Domain.Escalas.Escala", "Escala")
-                        .WithMany("Itens")
-                        .HasForeignKey("EscalaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PraiseYou.Domain.Musicas.Musica", "Musica")
-                        .WithMany()
-                        .HasForeignKey("MusicaId");
-
-                    b.HasOne("PraiseYou.Domain.Musicos.Musico", "Musico")
-                        .WithMany()
-                        .HasForeignKey("MusicoId");
+                        .WithMany("Musicas")
+                        .HasForeignKey("EscalaId");
 
                     b.Navigation("Escala");
+                });
 
-                    b.Navigation("Musica");
+            modelBuilder.Entity("PraiseYou.Domain.Escalas.EscalaMusico", b =>
+                {
+                    b.HasOne("PraiseYou.Domain.Escalas.Escala", "Escala")
+                        .WithMany("Musicos")
+                        .HasForeignKey("EscalaId");
 
-                    b.Navigation("Musico");
+                    b.Navigation("Escala");
                 });
 
             modelBuilder.Entity("PraiseYou.Domain.Escalas.Escala", b =>
                 {
-                    b.Navigation("Itens");
+                    b.Navigation("Musicas");
+
+                    b.Navigation("Musicos");
                 });
 #pragma warning restore 612, 618
         }
