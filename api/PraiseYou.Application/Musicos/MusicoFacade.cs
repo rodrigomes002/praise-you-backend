@@ -1,6 +1,7 @@
 ﻿using PraiseYou.Application.Musicos;
 using PraiseYou.Domain;
 using PraiseYou.Domain.Musicos;
+using System;
 using System.Collections.Generic;
 
 namespace PraiseYou.Application.Escalas
@@ -27,9 +28,7 @@ namespace PraiseYou.Application.Escalas
             var musico = this.unitOfWork.MusicoRepository.ListarPorId(requisicao.Id);
 
             if (musico is null)
-            {
                 throw new DefaultAppException("Músico não encontrado.");
-            }
 
             //TODO: Validação
 
@@ -42,7 +41,8 @@ namespace PraiseYou.Application.Escalas
 
         public void Cadastrar(MusicoRequisicao requisicao)
         {
-            //TODO: Validação
+            if (String.IsNullOrEmpty(requisicao.Nome)) throw new DefaultAppException("O campo nome é obrigatório.");
+            if (String.IsNullOrEmpty(requisicao.Instrumento)) throw new DefaultAppException("O campo instrumento é obrigatório.");
 
             var musico = new Musico(requisicao.Nome, requisicao.Instrumento);
             this.unitOfWork.MusicoRepository.Cadastrar(musico);

@@ -1,6 +1,7 @@
 ﻿using PraiseYou.Application.Musicas;
 using PraiseYou.Domain;
 using PraiseYou.Domain.Musicas;
+using System;
 using System.Collections.Generic;
 
 namespace PraiseYou.Application.Escalas
@@ -43,8 +44,9 @@ namespace PraiseYou.Application.Escalas
 
         public void Cadastrar(MusicaRequisicao requisicao)
         {
-
-            //TODO: Validação
+            if (String.IsNullOrEmpty(requisicao.Nome)) throw new DefaultAppException("O campo nome é obrigatório.");
+            if (String.IsNullOrEmpty(requisicao.Artista)) throw new DefaultAppException("O campo artista é obrigatório.");
+            if (String.IsNullOrEmpty(requisicao.Tom)) throw new DefaultAppException("O campo tom é obrigatório.");
 
             var musica = new Musica(requisicao.Nome, requisicao.Artista, requisicao.Tom);
             this.unitOfWork.MusicaRepository.Cadastrar(musica);
