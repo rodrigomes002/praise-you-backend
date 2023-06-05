@@ -59,5 +59,13 @@ namespace PraiseYou.Application.Escalas
             this.unitOfWork.MusicaRepository.Deletar(musica);
             this.unitOfWork.Commit();
         }
+
+        public void Deletar(List<int> ids)
+        {
+            foreach (var id in ids)
+            {
+                this.Deletar(id);
+            }
+        }
     }
 }

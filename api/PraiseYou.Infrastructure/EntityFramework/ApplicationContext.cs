@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using PraiseYou.Domain.Escalas;
 using PraiseYou.Domain.Musicas;
 using PraiseYou.Domain.Musicos;
-using System.Reflection.Emit;
 
 namespace PraiseYou.Infrastructure.EntityFramework
 {
@@ -17,7 +16,7 @@ namespace PraiseYou.Infrastructure.EntityFramework
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Escala>()                    
+            builder.Entity<Escala>()
                     .HasMany(e => e.Musicas)
                     .WithOne(e => e.Escala)
                     .OnDelete(DeleteBehavior.Cascade);

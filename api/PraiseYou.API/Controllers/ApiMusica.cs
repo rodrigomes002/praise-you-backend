@@ -55,7 +55,7 @@ namespace PraiseYou.API.Controllers
            
         }
 
-        [HttpPut("atualziar")]
+        [HttpPut("atualizar")]
         public IActionResult Atualizar([FromBody] MusicaRequisicao requisicao)
         {
             try
@@ -87,13 +87,12 @@ namespace PraiseYou.API.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult<Musico> Deletar(int id)
+        [HttpDelete("deletar/{id}")]
+        public IActionResult Deletar(int id)
         {
 
             try
             {
-                logger.LogInformation("REQUISICAO - Deletando musica por id: " + id);
                 this.musicaFacade.Deletar(id);
                 return Success();
             }
@@ -102,5 +101,21 @@ namespace PraiseYou.API.Controllers
                 return Error(e);
             }
         }
+
+        [HttpPost("deletar")]
+        public IActionResult Deletar([FromBody] List<int> id)
+        {
+
+            try
+            {
+                this.musicaFacade.Deletar(id);
+                return Success();
+            }
+            catch (Exception e)
+            {
+                return Error(e);
+            }
+        }
+
     }
 }

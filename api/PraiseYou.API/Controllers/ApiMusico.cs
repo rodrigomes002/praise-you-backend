@@ -87,13 +87,28 @@ namespace PraiseYou.API.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("deletar/{id}")]
         public ActionResult<Musico> Deletar(int id)
         {
 
             try
             {
                 logger.LogInformation("REQUISICAO - Buscando musico por id: " + id);
+                this.musicoFacade.Deletar(id);
+                return Success();
+            }
+            catch (Exception e)
+            {
+                return Error(e);
+            }
+        }
+
+        [HttpPost("deletar")]
+        public IActionResult Deletar([FromBody] List<int> id)
+        {
+
+            try
+            {
                 this.musicoFacade.Deletar(id);
                 return Success();
             }

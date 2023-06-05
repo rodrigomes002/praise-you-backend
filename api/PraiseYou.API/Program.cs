@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<EscalaFacade>();
 builder.Services.AddScoped<EscalaRepository, EFEscalaRepository>();
 builder.Services.AddScoped<EscalaMusicaRepository, EFEscalaMusicaRepository>();
