@@ -17,10 +17,12 @@ namespace PraiseYou.Infrastructure.EntityFramework
 
         public IEnumerable<Escala> ListarTodos()
         {
-            return this.context.Escala   
+            var dados = this.context.Escala   
                .Include(m=> m.Musicos)
                .Include(m => m.Musicas)
                .ToList();
+
+            return dados;
         }
 
         public Escala ListarPorId(int id)

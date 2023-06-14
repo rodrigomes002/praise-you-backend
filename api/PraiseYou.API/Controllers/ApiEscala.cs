@@ -25,7 +25,7 @@ namespace PraiseYou.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Escala>> Listar()
+        public ActionResult<IEnumerable<EscalaResponse>> Listar()
         {
             try
             {

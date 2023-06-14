@@ -6,15 +6,17 @@
         public string Nome { get; private set; }
         public string Artista { get; private set; }
         public string Tom { get; private set; }
+        public bool isManha { get; private set; }
 
         public int? EscalaId { get; set; }
         public Escala Escala { get; set; }
 
-        public EscalaMusica(string nome, string artista, string tom)
+        public EscalaMusica(string nome, string artista, string tom, bool isManha)
         {
             this.Nome = nome;
             this.Artista = artista;
             this.Tom = tom;
+            this.isManha = isManha;
         }
     }
 }

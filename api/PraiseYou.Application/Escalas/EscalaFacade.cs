@@ -1,6 +1,7 @@
 ﻿using PraiseYou.Domain;
 using PraiseYou.Domain.Escalas;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PraiseYou.Application.Escalas
 {
@@ -12,9 +13,23 @@ namespace PraiseYou.Application.Escalas
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<Escala> Listar()
+        public IEnumerable<EscalaResponse> Listar()
         {
-            return this.unitOfWork.EscalaRepository.ListarTodos();
+            var dados = this.unitOfWork.EscalaRepository.ListarTodos();
+            var result = new List<EscalaResponse>();
+            foreach (var dado in dados)
+            {
+                var escala = new EscalaResponse();
+                escala.Id = dado.Id;
+                escala.DataEnsaio = dado.DataEnsaio;
+                escala.DataParticipacao = dado.DataParticipacao;
+                escala.MusicasManha = dado.Musicas.Where(m => m.isManha).ToList();
+                escala.MusicasNoite = dado.Musicas.Where(m => !m.isManha).ToList();
+                escala.Musicos = dado.Musicos;
+                result.Add(escala);
+            }
+
+            return result;
         }
 
         public Escala ListarPorId(int id)
@@ -27,9 +42,17 @@ namespace PraiseYou.Application.Escalas
             //TODO: Validação
             var escala = new Escala(requisicao.DataParticipacao, requisicao.DataEnsaio);
 
-            foreach (var item in requisicao.Musicas)
+            foreach (var item in requisicao.MusicasManha)
             {
-                var musica = new EscalaMusica(item.Nome, item.Artista, item.Tom);                
+                var musica = new EscalaMusica(item.Nome, item.Artista, item.Tom, true);
+                musica.EscalaId = escala.Id;
+                musica.Escala = escala;
+                this.unitOfWork.EscalaMusicaRepository.Cadastrar(musica);
+            }
+
+            foreach (var item in requisicao.MusicasNoite)
+            {
+                var musica = new EscalaMusica(item.Nome, item.Artista, item.Tom, false);
                 musica.EscalaId = escala.Id;
                 musica.Escala = escala;
                 this.unitOfWork.EscalaMusicaRepository.Cadastrar(musica);
@@ -50,7 +73,7 @@ namespace PraiseYou.Application.Escalas
         public void Deletar(int id)
         {
             var escala = this.unitOfWork.EscalaRepository.ListarPorId(id);
-            this.unitOfWork.EscalaRepository.Deletar(escala);            
+            this.unitOfWork.EscalaRepository.Deletar(escala);
             this.unitOfWork.Commit();
         }
     }
